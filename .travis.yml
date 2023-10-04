@@ -12,3 +12,16 @@ script:
  # - docker build -t lucadefra92/flask_single_docker -f Dockerfile .
  # - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
  # - docker push lucadefra92/flask_single_docker
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "python-flask-single-docker"
+  env: "Python-flask-single-docker-env"
+  bucket_name: "elasticbeanstalk-us-east-1-108156832047"
+  bucket_path: "python-flask-single-docker"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: "$AWS_SECRET_KEY"
+
+

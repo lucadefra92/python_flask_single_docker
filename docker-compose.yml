@@ -1,7 +1,8 @@
 version: '3.8'
 services:
   flask_app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - 5001:5001
-    restart: always
