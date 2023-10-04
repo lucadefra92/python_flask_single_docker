@@ -1,0 +1,14 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t lucadefra92/flask_single_docker -f Dockerfile .
+
+script:
+  - docker run lucadefra92/flask_single_docker python -m pytest -v tests/test_app.py
+
+#after_success:
+ # - docker build -t lucadefra92/flask_single_docker -f Dockerfile .
+ # - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+ # - docker push lucadefra92/flask_single_docker
