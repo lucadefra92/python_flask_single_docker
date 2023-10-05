@@ -18,7 +18,7 @@ deploy:
   app: "flask-single-docker"
   env: "Flask-single-docker-env"
   bucket_name: "elasticbeanstalk-us-east-1-108156832047"
-  bucket_path: "python-flask-single-docker"
+  bucket_path: "flask-single-docker"
   on:
     branch: master
   access_key_id: $AWS_ACCESS_KEY
