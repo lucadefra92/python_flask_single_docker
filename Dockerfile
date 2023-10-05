@@ -1,12 +1,10 @@
-FROM python:3.8-slim-buster as builder
+FROM node:16-alpine as builder
 WORKDIR '/app'
-COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
+COPY package.json .
+RUN npm install
 COPY . .
-EXPOSE 5001
+RUN npm run build
 
-CMD [ "python", "app.py" ]
-
-#FROM nginx
-#EXPOSE 5001
-#COPY --from=builder /app/build /usr/share/nginx/html
+FROM nginx
+EXPOSE 80
+COPY --from=builder /app/build /usr/share/nginx/html
