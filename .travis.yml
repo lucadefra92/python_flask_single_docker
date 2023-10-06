@@ -1,0 +1,23 @@
+sudo: required
+language: generic
+
+services:
+  - docker
+
+before_install:
+  - docker build -t lucadefra92/flask-single-docker -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true lucadefra92/flask-single-docker npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "flask-single-docker"
+  env: "Flask-single-docker-env"
+  bucket_name: "elasticbeanstalk-us-east-1-108156832047"
+  bucket_path: "flask-single-docker"
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
